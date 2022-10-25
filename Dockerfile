@@ -39,9 +39,10 @@ RUN wget --quiet https://github.com/rdkit/rdkit/archive/refs/tags/${RDKIT_VERSIO
 
 WORKDIR /rdkit/Code/PgSQL/rdkit
 
-COPY patches/*.patch /tmp/
-RUN patch CMakeLists.txt /tmp/cmakelists.txt.patch \
- && patch adapter.cpp /tmp/adapter.cpp.patch
+# deactivate patch
+#COPY patches/*.patch /tmp/
+#RUN patch CMakeLists.txt /tmp/cmakelists.txt.patch \
+# && patch adapter.cpp /tmp/adapter.cpp.patch
 
 RUN cmake -Wno-dev \
     -D CMAKE_BUILD_TYPE=Release \
