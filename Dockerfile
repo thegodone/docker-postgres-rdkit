@@ -1,5 +1,4 @@
-FROM mcs07/rdkit:2020.03.2 as rdkit-env
-
+FROM mcs07/rdkit:2022.03.1 as rdkit-env
 FROM postgres:12 AS rdkit-postgres-build-env
 
 RUN apt-get update \
@@ -32,8 +31,8 @@ COPY --from=rdkit-env /usr/include/rdkit /usr/include/rdkit
 COPY --from=rdkit-env /usr/lib/python3/dist-packages/rdkit /usr/lib/python3/dist-packages/rdkit
 
 
-ARG RDKIT_VERSION=Release_2020_03_2
-RUN wget --quiet https://github.com/rdkit/rdkit/archive/${RDKIT_VERSION}.tar.gz \
+ARG RDKIT_VERSION=Release_2022_03_1
+RUN wget --quiet https://github.com/rdkit/rdkit/archive/refs/tags/${RDKIT_VERSION}.tar.gz \
  && tar -xzf ${RDKIT_VERSION}.tar.gz \
  && mv rdkit-${RDKIT_VERSION} rdkit \
  && rm ${RDKIT_VERSION}.tar.gz
